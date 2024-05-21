@@ -1,6 +1,8 @@
 # .env
 # .env.*
 # !.env.example
+db
+pgadmin
 
 .DS_Store
 .venv
