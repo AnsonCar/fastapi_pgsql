@@ -43,6 +43,9 @@ async def read_User(*, session: Session = Depends(get_session), id: str):
 async def update_User(
     *, session: Session = Depends(get_session), id: str, data: UserUpdate
 ):
+    db_data = session.exec(select(User).where(User.email == data.email)).first()
+    if db_data:
+        return UserResponse(code=400, msg="User with this email already exists")
     db_data = session.get(User, id)
     if not db_data:
         return UserResponse(code=404, msg="Data not found")
